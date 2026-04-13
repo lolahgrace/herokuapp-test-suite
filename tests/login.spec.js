@@ -38,5 +38,26 @@ test.describe('Login functionality', () => {
         expect(message).toContain('Your username is invalid!');
     });
 
+    test('User cannot login with valid username and invalid password', async ({page}) =>{
+        await loginPage.login('tomsmith', 'wrongPassword');
+
+        const message = await loginPage.getFlashMessage();
+        expect (message).toContain('Your password is invalid!');
+    });
+
+    test('User cannot login with invalid username and valid password', async ({page}) => {
+        await loginPage.login('wrongUser', 'SuperSecretPassword!');
+
+        const message = await loginPage.getFlashMessage();
+        expect(message).toContain('Your username is invalid!');
+    });
+
+    test('Login page elements are visible and enabled', async ({page}) => {
+         expect(loginPage.usernameInput).toBeVisible();
+         expect(loginPage.passwordInput).toBeVisible();
+         expect(loginPage.loginButton).toBeVisible();
+         expect(loginPage.loginButton).toBeEnabled();
+    });
+
 });
 
