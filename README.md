@@ -19,10 +19,12 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 herokuapp-test-suite/
 ├── pages/                    # Page Object Model files
 │   ├── LoginPage.js          # Login page actions and locators
-│   └── CheckboxPage.js       # Checkbox page actions and locators
+│   ├── CheckboxPage.js       # Checkbox page actions and locators
+│   └── DropdownPage.js       # Dropdown page actions and locators
 ├── tests/                    # Test spec files
 │   ├── login.spec.js         # Login functionality tests
-│   └── checkboxes.spec.js    # Checkbox functionality tests
+│   ├── checkboxes.spec.js    # Checkbox functionality tests
+│   └── dropdown.spec.js      # Dropdown functionality tests
 ├── playwright.config.js      # Playwright configuration
 ├── package.json
 └── README.md
@@ -54,6 +56,15 @@ herokuapp-test-suite/
 | Uncheck checkbox 2 | Unchecks checkbox 2 and verifies state changed to unchecked |
 | Check both checkboxes | Checks both checkboxes and verifies both are checked |
 | Uncheck both checkboxes | Unchecks both checkboxes and verifies both are unchecked |
+
+### ✅ Dropdown Page (`/dropdown`)
+
+| Test Case | Description |
+|---|---|
+| Initial state verification | Verifies dropdown defaults to placeholder and no option is pre-selected on page load |
+| Select option 1 | Selects option 1 and verifies it is selected |
+| Select option 2 | Selects option 2 and verifies it is selected |
+| Switch from option 1 to option 2 | Selects option 1, switches to option 2, and verifies the selection updated correctly |
 
 ---
 
@@ -93,6 +104,7 @@ Run a specific test file:
 ```bash
 npx playwright test tests/login.spec.js
 npx playwright test tests/checkboxes.spec.js
+npx playwright test tests/dropdown.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
