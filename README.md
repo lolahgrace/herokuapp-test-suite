@@ -17,11 +17,13 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 
 ```
 herokuapp-test-suite/
-├── pages/                  # Page Object Model files
-│   └── LoginPage.js        # Login page actions and locators
-├── tests/                  # Test spec files
-│   └── login.spec.js       # Login functionality tests
-├── playwright.config.js    # Playwright configuration
+├── pages/                    # Page Object Model files
+│   ├── LoginPage.js          # Login page actions and locators
+│   └── CheckboxPage.js       # Checkbox page actions and locators
+├── tests/                    # Test spec files
+│   ├── login.spec.js         # Login functionality tests
+│   └── checkboxes.spec.js    # Checkbox functionality tests
+├── playwright.config.js      # Playwright configuration
 ├── package.json
 └── README.md
 ```
@@ -43,6 +45,15 @@ herokuapp-test-suite/
 | Trailing spaces in password | Password with trailing whitespace |
 | UI visibility checks | Verifies form fields and button are visible and enabled |
 
+### ✅ Checkboxes Page (`/checkboxes`)
+
+| Test Case | Description |
+|---|---|
+| Initial state verification | Verifies checkbox 1 is unchecked and checkbox 2 is checked on page load |
+| Check checkbox 1 | Checks checkbox 1 and verifies state changed to checked |
+| Uncheck checkbox 2 | Unchecks checkbox 2 and verifies state changed to unchecked |
+| Check both checkboxes | Checks both checkboxes and verifies both are checked |
+| Uncheck both checkboxes | Unchecks both checkboxes and verifies both are unchecked |
 
 ---
 
@@ -81,6 +92,7 @@ Run a specific test file:
 
 ```bash
 npx playwright test tests/login.spec.js
+npx playwright test tests/checkboxes.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
