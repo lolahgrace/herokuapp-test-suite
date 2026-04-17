@@ -20,11 +20,13 @@ herokuapp-test-suite/
 ├── pages/                    # Page Object Model files
 │   ├── LoginPage.js          # Login page actions and locators
 │   ├── CheckboxPage.js       # Checkbox page actions and locators
-│   └── DropdownPage.js       # Dropdown page actions and locators
+│   ├── DropdownPage.js       # Dropdown page actions and locators
+│   └── InputsPage.js         # Inputs page actions and locators
 ├── tests/                    # Test spec files
 │   ├── login.spec.js         # Login functionality tests
 │   ├── checkboxes.spec.js    # Checkbox functionality tests
-│   └── dropdown.spec.js      # Dropdown functionality tests
+│   ├── dropdown.spec.js      # Dropdown functionality tests
+│   └── inputs.spec.js        # Inputs functionality tests
 ├── playwright.config.js      # Playwright configuration
 ├── package.json
 └── README.md
@@ -66,6 +68,18 @@ herokuapp-test-suite/
 | Select option 2 | Selects option 2 and verifies it is selected |
 | Switch from option 1 to option 2 | Selects option 1, switches to option 2, and verifies the selection updated correctly |
 
+### ✅ Inputs Page (`/inputs`)
+
+| Test Case | Description |
+|---|---|
+| Enter a valid number | Types a valid number and verifies it appears in the field |
+| Enter a negative number | Types a negative number and verifies it is accepted |
+| Clear the input | Enters a number, clears the field, and verifies it is empty |
+| Increment via arrow key | Types a number, presses ArrowUp, and verifies the value increased by 1 |
+| Decrement via arrow key | Types a number, presses ArrowDown, and verifies the value decreased by 1 |
+| Reject alphabets | Types alphabetic characters and verifies the field rejects them |
+| Reject special characters | Types special characters and verifies the field rejects them |
+
 ---
 
 ## Getting Started
@@ -105,6 +119,7 @@ Run a specific test file:
 npx playwright test tests/login.spec.js
 npx playwright test tests/checkboxes.spec.js
 npx playwright test tests/dropdown.spec.js
+npx playwright test tests/inputs.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
