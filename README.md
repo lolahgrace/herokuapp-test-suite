@@ -17,17 +17,19 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 
 ```
 herokuapp-test-suite/
-├── pages/                    # Page Object Model files
-│   ├── LoginPage.js          # Login page actions and locators
-│   ├── CheckboxPage.js       # Checkbox page actions and locators
-│   ├── DropdownPage.js       # Dropdown page actions and locators
-│   └── InputsPage.js         # Inputs page actions and locators
-├── tests/                    # Test spec files
-│   ├── login.spec.js         # Login functionality tests
-│   ├── checkboxes.spec.js    # Checkbox functionality tests
-│   ├── dropdown.spec.js      # Dropdown functionality tests
-│   └── inputs.spec.js        # Inputs functionality tests
-├── playwright.config.js      # Playwright configuration
+├── pages/                          # Page Object Model files
+│   ├── LoginPage.js                # Login page actions and locators
+│   ├── CheckboxPage.js             # Checkbox page actions and locators
+│   ├── DropdownPage.js             # Dropdown page actions and locators
+│   ├── InputsPage.js               # Inputs page actions and locators
+│   └── AddRemoveElementsPage.js    # Add/Remove Elements page actions and locators
+├── tests/                          # Test spec files
+│   ├── login.spec.js               # Login functionality tests
+│   ├── checkboxes.spec.js          # Checkbox functionality tests
+│   ├── dropdown.spec.js            # Dropdown functionality tests
+│   ├── inputs.spec.js              # Inputs functionality tests
+│   └── addRemoveElements.spec.js   # Add/Remove Elements functionality tests
+├── playwright.config.js            # Playwright configuration
 ├── package.json
 └── README.md
 ```
@@ -80,6 +82,17 @@ herokuapp-test-suite/
 | Reject alphabets | Types alphabetic characters and verifies the field rejects them |
 | Reject special characters | Types special characters and verifies the field rejects them |
 
+### ✅ Add/Remove Elements Page (`/add_remove_elements`)
+
+| Test Case | Description |
+|---|---|
+| Initial state verification | Verifies no delete buttons are present on page load |
+| Add a single element | Clicks Add Element once and verifies one delete button appears |
+| Delete an element | Adds one element, deletes it, and verifies it disappears |
+| Add multiple elements | Adds multiple elements and verifies the correct count appears |
+| Delete one of multiple elements | Adds multiple elements, deletes one, and verifies the correct count remains |
+| Remove all elements | Adds multiple elements, deletes all, and verifies none remain |
+
 ---
 
 ## Getting Started
@@ -120,6 +133,7 @@ npx playwright test tests/login.spec.js
 npx playwright test tests/checkboxes.spec.js
 npx playwright test tests/dropdown.spec.js
 npx playwright test tests/inputs.spec.js
+npx playwright test tests/addRemoveElements.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
