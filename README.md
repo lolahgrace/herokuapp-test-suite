@@ -17,19 +17,21 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 
 ```
 herokuapp-test-suite/
-├── pages/                          # Page Object Model files
-│   ├── LoginPage.js                # Login page actions and locators
-│   ├── CheckboxPage.js             # Checkbox page actions and locators
-│   ├── DropdownPage.js             # Dropdown page actions and locators
-│   ├── InputsPage.js               # Inputs page actions and locators
-│   └── AddRemoveElementsPage.js    # Add/Remove Elements page actions and locators
-├── tests/                          # Test spec files
-│   ├── login.spec.js               # Login functionality tests
-│   ├── checkboxes.spec.js          # Checkbox functionality tests
-│   ├── dropdown.spec.js            # Dropdown functionality tests
-│   ├── inputs.spec.js              # Inputs functionality tests
-│   └── addRemoveElements.spec.js   # Add/Remove Elements functionality tests
-├── playwright.config.js            # Playwright configuration
+├── pages/                           # Page Object Model files
+│   ├── LoginPage.js                 # Login page actions and locators
+│   ├── CheckboxPage.js              # Checkbox page actions and locators
+│   ├── DropdownPage.js              # Dropdown page actions and locators
+│   ├── InputsPage.js                # Inputs page actions and locators
+│   ├── AddRemoveElementsPage.js     # Add/Remove Elements page actions and locators
+│   └── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
+├── tests/                           # Test spec files
+│   ├── login.spec.js                # Login functionality tests
+│   ├── checkboxes.spec.js           # Checkbox functionality tests
+│   ├── dropdown.spec.js             # Dropdown functionality tests
+│   ├── inputs.spec.js               # Inputs functionality tests
+│   ├── addRemoveElements.spec.js    # Add/Remove Elements functionality tests
+│   └── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
+├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
 ```
@@ -93,6 +95,16 @@ herokuapp-test-suite/
 | Delete one of multiple elements | Adds multiple elements, deletes one, and verifies the correct count remains |
 | Remove all elements | Adds multiple elements, deletes all, and verifies none remain |
 
+### ✅ JavaScript Alerts Page (`/javascript_alerts`)
+
+| Test Case | Description |
+|---|---|
+| JS Alert — accept and verify | Clicks JS Alert, accepts it, and verifies the result message |
+| JS Confirm — accept and verify | Clicks JS Confirm, accepts it, and verifies "You clicked: Ok" |
+| JS Confirm — dismiss and verify | Clicks JS Confirm, dismisses it, and verifies "You clicked: Cancel" |
+| JS Prompt — type and accept | Clicks JS Prompt, types text, accepts, and verifies the entered text appears |
+| JS Prompt — cancel and verify | Clicks JS Prompt, cancels, and verifies "You entered: null" |
+
 ---
 
 ## Getting Started
@@ -134,6 +146,7 @@ npx playwright test tests/checkboxes.spec.js
 npx playwright test tests/dropdown.spec.js
 npx playwright test tests/inputs.spec.js
 npx playwright test tests/addRemoveElements.spec.js
+npx playwright test tests/javascriptAlerts.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
