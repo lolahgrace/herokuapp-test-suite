@@ -23,14 +23,16 @@ herokuapp-test-suite/
 │   ├── DropdownPage.js              # Dropdown page actions and locators
 │   ├── InputsPage.js                # Inputs page actions and locators
 │   ├── AddRemoveElementsPage.js     # Add/Remove Elements page actions and locators
-│   └── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
+│   ├── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
+│   └── HoversPage.js                # Hovers page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
 │   ├── dropdown.spec.js             # Dropdown functionality tests
 │   ├── inputs.spec.js               # Inputs functionality tests
 │   ├── addRemoveElements.spec.js    # Add/Remove Elements functionality tests
-│   └── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
+│   ├── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
+│   └── hovers.spec.js               # Hovers functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -105,6 +107,14 @@ herokuapp-test-suite/
 | JS Prompt — type and accept | Clicks JS Prompt, types text, accepts, and verifies the entered text appears |
 | JS Prompt — cancel and verify | Clicks JS Prompt, cancels, and verifies "You entered: null" |
 
+### ✅ Hovers Page (`/hovers`)
+
+| Test Case | Description |
+|---|---|
+| Hover over each user (loop) | Verifies user info is hidden before hover and visible after hover for all 3 users |
+| Click "View profile" for each user (loop) | Hovers over each user, clicks "View profile", and verifies navigation to correct URL |
+| Switch hover from user 1 to user 2 | Verifies user 1's info hides and user 2's info appears when switching hover |
+
 ---
 
 ## Getting Started
@@ -147,6 +157,7 @@ npx playwright test tests/dropdown.spec.js
 npx playwright test tests/inputs.spec.js
 npx playwright test tests/addRemoveElements.spec.js
 npx playwright test tests/javascriptAlerts.spec.js
+npx playwright test tests/hovers.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
