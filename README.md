@@ -24,7 +24,8 @@ herokuapp-test-suite/
 │   ├── InputsPage.js                # Inputs page actions and locators
 │   ├── AddRemoveElementsPage.js     # Add/Remove Elements page actions and locators
 │   ├── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
-│   └── HoversPage.js                # Hovers page actions and locators
+│   ├── HoversPage.js                # Hovers page actions and locators
+│   └── DynamicControlsPage.js       # Dynamic Controls page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -32,7 +33,8 @@ herokuapp-test-suite/
 │   ├── inputs.spec.js               # Inputs functionality tests
 │   ├── addRemoveElements.spec.js    # Add/Remove Elements functionality tests
 │   ├── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
-│   └── hovers.spec.js               # Hovers functionality tests
+│   ├── hovers.spec.js               # Hovers functionality tests
+│   └── dynamicControls.spec.js      # Dynamic Controls functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -115,6 +117,16 @@ herokuapp-test-suite/
 | Click "View profile" for each user (loop) | Hovers over each user, clicks "View profile", and verifies navigation to correct URL |
 | Switch hover from user 1 to user 2 | Verifies user 1's info hides and user 2's info appears when switching hover |
 
+### ✅ Dynamic Controls Page (`/dynamic_controls`)
+
+| Test Case | Description |
+|---|---|
+| Initial state verification | Verifies checkbox is visible and input field is disabled on page load |
+| Remove checkbox | Clicks Remove, waits, and verifies checkbox is gone and "It's gone!" message appears |
+| Add checkbox back | Removes checkbox first, then adds it back, and verifies "It's back!" message appears |
+| Enable input | Clicks Enable, waits, and verifies input is enabled and "It's enabled!" message appears |
+| Disable input | Enables input first, then disables it, and verifies "It's disabled!" message appears |
+
 ---
 
 ## Getting Started
@@ -158,6 +170,7 @@ npx playwright test tests/inputs.spec.js
 npx playwright test tests/addRemoveElements.spec.js
 npx playwright test tests/javascriptAlerts.spec.js
 npx playwright test tests/hovers.spec.js
+npx playwright test tests/dynamicControls.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
