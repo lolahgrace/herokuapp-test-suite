@@ -25,7 +25,8 @@ herokuapp-test-suite/
 │   ├── AddRemoveElementsPage.js     # Add/Remove Elements page actions and locators
 │   ├── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
 │   ├── HoversPage.js                # Hovers page actions and locators
-│   └── DynamicControlsPage.js       # Dynamic Controls page actions and locators
+│   ├── DynamicControlsPage.js       # Dynamic Controls page actions and locators
+│   └── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -34,7 +35,8 @@ herokuapp-test-suite/
 │   ├── addRemoveElements.spec.js    # Add/Remove Elements functionality tests
 │   ├── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
 │   ├── hovers.spec.js               # Hovers functionality tests
-│   └── dynamicControls.spec.js      # Dynamic Controls functionality tests
+│   ├── dynamicControls.spec.js      # Dynamic Controls functionality tests
+│   └── dynamicLoading.spec.js       # Dynamic Loading functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -127,6 +129,15 @@ herokuapp-test-suite/
 | Enable input | Clicks Enable, waits, and verifies input is enabled and "It's enabled!" message appears |
 | Disable input | Enables input first, then disables it, and verifies "It's disabled!" message appears |
 
+### ✅ Dynamic Loading Page (`/dynamic_loading`)
+
+| Test Case | Description |
+|---|---|
+| Example 1 — initial state | Verifies finish text exists in DOM but is hidden on page load |
+| Example 1 — reveal hidden element | Clicks Start, waits for loading, and verifies "Hello World!" becomes visible |
+| Example 2 — initial state | Verifies finish text does not exist in the DOM on page load |
+| Example 2 — render new element | Clicks Start, waits for loading, and verifies "Hello World!" is created and visible |
+
 ---
 
 ## Getting Started
@@ -171,6 +182,7 @@ npx playwright test tests/addRemoveElements.spec.js
 npx playwright test tests/javascriptAlerts.spec.js
 npx playwright test tests/hovers.spec.js
 npx playwright test tests/dynamicControls.spec.js
+npx playwright test tests/dynamicLoading.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
