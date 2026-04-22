@@ -17,6 +17,9 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 
 ```
 herokuapp-test-suite/
+├── fixtures/                        # Test fixture files
+│   ├── test-file.txt                # Sample file for upload tests
+│   └── empty.txt                    # Empty file for edge case upload tests
 ├── pages/                           # Page Object Model files
 │   ├── LoginPage.js                 # Login page actions and locators
 │   ├── CheckboxPage.js              # Checkbox page actions and locators
@@ -26,7 +29,8 @@ herokuapp-test-suite/
 │   ├── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
 │   ├── HoversPage.js                # Hovers page actions and locators
 │   ├── DynamicControlsPage.js       # Dynamic Controls page actions and locators
-│   └── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
+│   ├── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
+│   └── FileUploadPage.js            # File Upload page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -36,7 +40,8 @@ herokuapp-test-suite/
 │   ├── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
 │   ├── hovers.spec.js               # Hovers functionality tests
 │   ├── dynamicControls.spec.js      # Dynamic Controls functionality tests
-│   └── dynamicLoading.spec.js       # Dynamic Loading functionality tests
+│   ├── dynamicLoading.spec.js       # Dynamic Loading functionality tests
+│   └── fileUpload.spec.js           # File Upload functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -138,6 +143,15 @@ herokuapp-test-suite/
 | Example 2 — initial state | Verifies finish text does not exist in the DOM on page load |
 | Example 2 — render new element | Clicks Start, waits for loading, and verifies "Hello World!" is created and visible |
 
+### ✅ File Upload Page (`/upload`)
+
+| Test Case | Description |
+|---|---|
+| Successful file upload | Verifies initial state, uploads a file via button, and confirms "File Uploaded!" message |
+| Drag and drop upload | Uploads a file via the drag and drop zone and verifies the file name appears |
+| Empty file upload | Uploads a 0kb empty file and verifies it is accepted |
+| Upload without selecting a file | Clicks Upload with no file selected and verifies error page appears |
+
 ---
 
 ## Getting Started
@@ -183,6 +197,7 @@ npx playwright test tests/javascriptAlerts.spec.js
 npx playwright test tests/hovers.spec.js
 npx playwright test tests/dynamicControls.spec.js
 npx playwright test tests/dynamicLoading.spec.js
+npx playwright test tests/fileUpload.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
