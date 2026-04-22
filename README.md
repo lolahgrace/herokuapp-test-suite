@@ -31,7 +31,8 @@ herokuapp-test-suite/
 │   ├── DynamicControlsPage.js       # Dynamic Controls page actions and locators
 │   ├── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
 │   ├── FileUploadPage.js            # File Upload page actions and locators
-│   └── FileDownloadPage.js          # File Download page actions and locators
+│   ├── FileDownloadPage.js          # File Download page actions and locators
+│   └── BrokenImagesPage.js          # Broken Images page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -43,7 +44,8 @@ herokuapp-test-suite/
 │   ├── dynamicControls.spec.js      # Dynamic Controls functionality tests
 │   ├── dynamicLoading.spec.js       # Dynamic Loading functionality tests
 │   ├── fileUpload.spec.js           # File Upload functionality tests
-│   └── fileDownload.spec.js         # File Download functionality tests
+│   ├── fileDownload.spec.js         # File Download functionality tests
+│   └── brokenImages.spec.js         # Broken Images functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -162,6 +164,12 @@ herokuapp-test-suite/
 | Download a file | Clicks a file link and verifies the download event is triggered |
 | File name matches link | Verifies the downloaded file name matches the link that was clicked |
 
+### ✅ Broken Images Page (`/broken_images`)
+
+| Test Case | Description |
+|---|---|
+| Detect broken images | Loops through all images, uses browser-native `naturalWidth` to detect broken ones, and reports each failure individually using soft assertions |
+
 ---
 
 ## Getting Started
@@ -209,6 +217,7 @@ npx playwright test tests/dynamicControls.spec.js
 npx playwright test tests/dynamicLoading.spec.js
 npx playwright test tests/fileUpload.spec.js
 npx playwright test tests/fileDownload.spec.js
+npx playwright test tests/brokenImages.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
