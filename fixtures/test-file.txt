@@ -1,0 +1,10 @@
+This is a test file for Playwright file upload automation.
+
+Name: Test User
+Purpose: Verifying file upload functionality
+Date: April 2026
+
+The quick brown fox jumps over the lazy dog.
+1234567890
+
+End of file.
