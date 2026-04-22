@@ -30,7 +30,8 @@ herokuapp-test-suite/
 │   ├── HoversPage.js                # Hovers page actions and locators
 │   ├── DynamicControlsPage.js       # Dynamic Controls page actions and locators
 │   ├── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
-│   └── FileUploadPage.js            # File Upload page actions and locators
+│   ├── FileUploadPage.js            # File Upload page actions and locators
+│   └── FileDownloadPage.js          # File Download page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -41,7 +42,8 @@ herokuapp-test-suite/
 │   ├── hovers.spec.js               # Hovers functionality tests
 │   ├── dynamicControls.spec.js      # Dynamic Controls functionality tests
 │   ├── dynamicLoading.spec.js       # Dynamic Loading functionality tests
-│   └── fileUpload.spec.js           # File Upload functionality tests
+│   ├── fileUpload.spec.js           # File Upload functionality tests
+│   └── fileDownload.spec.js         # File Download functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -152,6 +154,14 @@ herokuapp-test-suite/
 | Empty file upload | Uploads a 0kb empty file and verifies it is accepted |
 | Upload without selecting a file | Clicks Upload with no file selected and verifies error page appears |
 
+### ✅ File Download Page (`/download`)
+
+| Test Case | Description |
+|---|---|
+| Files listed on page load | Verifies download links are visible on page load |
+| Download a file | Clicks a file link and verifies the download event is triggered |
+| File name matches link | Verifies the downloaded file name matches the link that was clicked |
+
 ---
 
 ## Getting Started
@@ -198,6 +208,7 @@ npx playwright test tests/hovers.spec.js
 npx playwright test tests/dynamicControls.spec.js
 npx playwright test tests/dynamicLoading.spec.js
 npx playwright test tests/fileUpload.spec.js
+npx playwright test tests/fileDownload.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
