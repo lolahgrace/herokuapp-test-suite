@@ -32,7 +32,8 @@ herokuapp-test-suite/
 │   ├── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
 │   ├── FileUploadPage.js            # File Upload page actions and locators
 │   ├── FileDownloadPage.js          # File Download page actions and locators
-│   └── BrokenImagesPage.js          # Broken Images page actions and locators
+│   ├── BrokenImagesPage.js          # Broken Images page actions and locators
+│   └── FramesPage.js                # Frames (iFrame) page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
@@ -45,7 +46,8 @@ herokuapp-test-suite/
 │   ├── dynamicLoading.spec.js       # Dynamic Loading functionality tests
 │   ├── fileUpload.spec.js           # File Upload functionality tests
 │   ├── fileDownload.spec.js         # File Download functionality tests
-│   └── brokenImages.spec.js         # Broken Images functionality tests
+│   ├── brokenImages.spec.js         # Broken Images functionality tests
+│   └── frames.spec.js               # Frames (iFrame) functionality tests
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -170,6 +172,14 @@ herokuapp-test-suite/
 |---|---|
 | Detect broken images | Loops through all images, uses browser-native `naturalWidth` to detect broken ones, and reports each failure individually using soft assertions |
 
+### ✅ Frames — iFrame Page (`/iframe`)
+
+| Test Case | Description |
+|---|---|
+| Verify editor is accessible | Switches into the iFrame and verifies the TinyMCE editor body is visible |
+| Type text inside iFrame editor | Clears existing content, types new text, and verifies it appears correctly |
+| Verify main page context | Confirms the outer page header is accessible after iFrame interaction |
+
 ---
 
 ## Getting Started
@@ -218,6 +228,7 @@ npx playwright test tests/dynamicLoading.spec.js
 npx playwright test tests/fileUpload.spec.js
 npx playwright test tests/fileDownload.spec.js
 npx playwright test tests/brokenImages.spec.js
+npx playwright test tests/frames.spec.js
 ```
 
 Run with the Playwright UI (interactive mode):
