@@ -1,5 +1,5 @@
-import { test, expect } from "@playwright/test";
 import LoginPage from "../pages/LoginPage.js";
+import { test, expect } from '../fixtures/index.js'
 
 const testData = {
   validUser: {
@@ -31,6 +31,22 @@ const testData = {
     password: "SuperSecretPassword! ",
   },
 };
+test.describe("Authenticated user actions", () => {
+
+  test("User can login and logout successfully", async ({ loggedInPage }) => {
+    await test.step("Verify success message after login", async () => {
+      const message = await loggedInPage.getFlashMessage();
+      expect(message).toContain("You logged into a secure area!");
+    });
+    await test.step("Logout and verify logout message", async () => {
+      await loggedInPage.logout();
+      const logoutMessage = await loggedInPage.getFlashMessage();
+      expect(logoutMessage).toContain("You logged out of the secure area!");
+    });
+  });
+
+});
+
 
 test.describe("Login functionality", () => {
   let loginPage;
@@ -38,25 +54,6 @@ test.describe("Login functionality", () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     await loginPage.goto();
-  });
-
-  test("User can login and logout successfully", async ({ page }) => {
-    await test.step(
-      "Login with valid credentials and verify success message",
-      async () => {
-        await loginPage.login(
-          testData.validUser.username,
-          testData.validUser.password,
-        );
-        const message = await loginPage.getFlashMessage();
-        expect(message).toContain("You logged into a secure area!");
-      },
-    );
-    await test.step("Logout from secure area and verify message", async () => {
-      await loginPage.logout();
-      const logoutMessage = await loginPage.getFlashMessage();
-      expect(logoutMessage).toContain("You logged out of the secure area!");
-    });
   });
 
   test("User cannot login with invalid credentials", async ({ page }) => {
