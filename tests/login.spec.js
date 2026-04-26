@@ -31,6 +31,7 @@ const testData = {
     password: "SuperSecretPassword! ",
   },
 };
+
 test.describe("Authenticated user actions", () => {
 
   test("User can login and logout successfully", async ({ loggedInPage }) => {

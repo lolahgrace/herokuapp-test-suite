@@ -1,4 +1,5 @@
 // @ts-check
+import 'dotenv/config'
 import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
@@ -24,7 +25,7 @@ export default defineConfig({
 
   /* Shared settings for all projects */
   use: {
-    baseURL: 'https://the-internet.herokuapp.com',
+    baseURL: process.env.BASE_URL,
     timeout: 30000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
