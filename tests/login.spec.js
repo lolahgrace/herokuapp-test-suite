@@ -1,5 +1,5 @@
 import LoginPage from "../pages/LoginPage.js";
-import { test, expect } from '../fixtures/index.js'
+import { test, expect } from "../fixtures/index.js";
 
 const testData = {
   validUser: {
@@ -33,7 +33,6 @@ const testData = {
 };
 
 test.describe("Authenticated user actions", () => {
-
   test("User can login and logout successfully", async ({ loggedInPage }) => {
     await test.step("Verify success message after login", async () => {
       const message = await loggedInPage.getFlashMessage();
@@ -45,9 +44,7 @@ test.describe("Authenticated user actions", () => {
       expect(logoutMessage).toContain("You logged out of the secure area!");
     });
   });
-
 });
-
 
 test.describe("Login functionality", () => {
   let loginPage;
@@ -154,4 +151,17 @@ test.describe("Login functionality", () => {
       await expect(loginPage.loginButton).toBeEnabled();
     });
   });
+});
+
+test.afterEach(async ({ page }, testInfo) => {
+  if (testInfo.status !== testInfo.expectedStatus) {
+    const screenshotPath = `test-results/${testInfo.title.replace(
+      /\s+/g,
+      "-",
+    )}.png`;
+    await page.screenshot({ path: screenshotPath });
+    console.log(`Test failed: ${testInfo.title}`);
+    console.log(`Screenshot saved: ${screenshotPath}`);
+  }
+  await page.context().clearCookies();
 });
