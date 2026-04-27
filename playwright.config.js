@@ -2,38 +2,37 @@
 import 'dotenv/config'
 import { defineConfig, devices } from '@playwright/test';
 
+/** @type {{ [key: string]: { baseURL: string } }} */
+const environments = {
+  staging: {
+    baseURL: 'https://the-internet.herokuapp.com',
+  },
+  production: {
+    baseURL: 'https://the-internet.herokuapp.com',
+  },
+}
+
+const env = process.env.TEST_ENV || 'staging'
+const currentEnv = environments[env] || environments['staging']
+
 export default defineConfig({
   testDir: './tests',
-  
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  
-  /* Fail the build on CI if you accidentally left test.only in the source code */
   forbidOnly: !!process.env.CI,
-  
-  /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
-  
-  /* Opt out of parallel tests on CI */
   workers: process.env.CI ? 1 : undefined,
-  
-  /* Reporters */
   reporter: [
     ['html'],
     ['list']
   ],
-
-  /* Shared settings for all projects */
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: currentEnv.baseURL,
     timeout: 30000,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     headless: true,
   },
-
-  /* Browsers to test against */
   projects: [
     {
       name: 'chromium',
