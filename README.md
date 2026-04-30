@@ -1,6 +1,6 @@
 # herokuapp-test-suite
 
-An automated test suite built using [Playwright](https://playwright.dev/) and JavaScript, targeting [The Internet by Herokuapp](https://the-internet.herokuapp.com/). Tests are structured using the Page Object Model (POM) pattern and run across Chromium and Firefox browsers.
+An automated test suite built using [Playwright](https://playwright.dev/) and JavaScript, targeting [The Internet by Herokuapp](https://the-internet.herokuapp.com/) and [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Tests are structured using the Page Object Model (POM) pattern and run across Chromium and Firefox browsers.
 
 ---
 
@@ -10,6 +10,11 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 - **Semantic Reporting:** Utilizes `test.step` to provide human-readable audit logs in HTML reports.
 - **Comprehensive Test Coverage:** Includes Happy Path, Sad Path (negative testing), and UI-state validation.
 - **Data-Driven Design:** Test scenarios are driven by centralized data objects to ensure clean, DRY code.
+- **Playwright Fixtures:** Reusable `loggedInPage` fixture injects authenticated state into tests, eliminating repetitive login setup across the suite.
+- **Multi-Environment Configuration:** Suite supports staging and production environments via `.env` and `cross-env`, switchable with a single npm script.
+- **API & Hybrid Testing:** Includes dedicated API tests using Playwright's `request` fixture and hybrid tests combining API creation with response verification.
+- **Automated Cleanup:** `test.afterEach` hook captures screenshots on failure and clears cookies after every test run.
+- **Trace Viewer Ready:** Playwright traces are captured on first retry, providing step-by-step visual debugging for failed tests.
 
 ---
 
@@ -18,6 +23,7 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 ```
 herokuapp-test-suite/
 ├── fixtures/                        # Test fixture files
+│   ├── index.js                     # loggedInPage fixture — reusable authenticated state
 │   ├── test-file.txt                # Sample file for upload tests
 │   └── empty.txt                    # Empty file for edge case upload tests
 ├── pages/                           # Page Object Model files
@@ -36,6 +42,8 @@ herokuapp-test-suite/
 │   └── FramesPage.js                # Frames (iFrame) page actions and locators
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
+│   ├── api.spec.js                  # API tests using Playwright request fixture
+│   ├── hybrid.spec.js               # Hybrid tests combining API and UI verification
 │   ├── checkboxes.spec.js           # Checkbox functionality tests
 │   ├── dropdown.spec.js             # Dropdown functionality tests
 │   ├── inputs.spec.js               # Inputs functionality tests
@@ -48,10 +56,48 @@ herokuapp-test-suite/
 │   ├── fileDownload.spec.js         # File Download functionality tests
 │   ├── brokenImages.spec.js         # Broken Images functionality tests
 │   └── frames.spec.js               # Frames (iFrame) functionality tests
+├── .env.example                     # Public-safe template for required environment variables
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
 ```
+
+---
+
+## Framework Architecture
+
+### Environment Configuration
+
+The suite uses `.env` for environment-specific variables. Copy `.env.example` to `.env` and populate with your values:
+
+```
+BASE_URL=https://the-internet.herokuapp.com
+LOGIN_USERNAME=your_username
+LOGIN_PASSWORD=your_password
+TEST_ENV=staging
+```
+
+Environment switching is handled via `cross-env` in npm scripts — no code changes required.
+
+### Fixtures
+
+The `loggedInPage` fixture in `fixtures/index.js` handles authentication setup and teardown automatically. Tests that require an authenticated state request this fixture instead of repeating login steps manually:
+
+```javascript
+test('example', async ({ loggedInPage }) => {
+  // already logged in — test starts on secure page
+})
+```
+
+### Cleanup
+
+A `test.afterEach` hook runs after every test:
+- Captures a screenshot with a meaningful filename if the test fails
+- Clears browser cookies to ensure a clean state for the next test
+
+### Trace Viewer
+
+Traces are configured with `on-first-retry` — automatically recorded when a test fails and retries. Open traces via the HTML report for step-by-step visual debugging, network request inspection, and DOM snapshots at each action.
 
 ---
 
@@ -69,6 +115,20 @@ herokuapp-test-suite/
 | Trailing spaces in username | Username with trailing whitespace |
 | Trailing spaces in password | Password with trailing whitespace |
 | UI visibility checks | Verifies form fields and button are visible and enabled |
+
+### ✅ API Tests (JSONPlaceholder)
+
+| Test Case | Description |
+|---|---|
+| GET single user | Fetches user by ID, verifies status 200, id, name, and email format |
+| POST new post | Creates a post, verifies status 201, id exists, and title matches |
+| DELETE a post | Deletes a post by ID, verifies status 200 |
+
+### ✅ Hybrid Tests (JSONPlaceholder)
+
+| Test Case | Description |
+|---|---|
+| Create then verify via API | POSTs a new resource, asserts 201, verifies all response fields match the sent data |
 
 ### ✅ Checkboxes Page (`/checkboxes`)
 
@@ -198,12 +258,34 @@ npm install
 npx playwright install
 ```
 
+### Environment Setup
+
+Copy `.env.example` to `.env` and populate with your values:
+
+```bash
+cp .env.example .env
+```
+
 ### Running Tests
 
 Run all tests across all configured browsers:
 
 ```bash
 npx playwright test
+```
+
+Run tests against a specific environment:
+
+```bash
+npm run test:staging
+npm run test:prod
+```
+
+Run a specific test file against staging:
+
+```bash
+npm run test:staging:login
+npm run test:prod:login
 ```
 
 Run tests in a specific browser:
@@ -217,6 +299,8 @@ Run a specific test file:
 
 ```bash
 npx playwright test tests/login.spec.js
+npx playwright test tests/api.spec.js
+npx playwright test tests/hybrid.spec.js
 npx playwright test tests/checkboxes.spec.js
 npx playwright test tests/dropdown.spec.js
 npx playwright test tests/inputs.spec.js
@@ -251,6 +335,8 @@ npx playwright show-report
 - JavaScript (ES Modules)
 - Page Object Model (POM) pattern
 - Chromium & Firefox cross-browser testing
+- dotenv — environment variable management
+- cross-env — cross-platform environment switching
 - Conventional Commits for version control
 
 ---
