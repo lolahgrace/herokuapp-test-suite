@@ -7,7 +7,14 @@
     "test:staging": "cross-env TEST_ENV=staging npx playwright test",
     "test:prod": "cross-env TEST_ENV=production npx playwright test",
     "test:staging:login": "cross-env TEST_ENV=staging npx playwright test tests/login.spec.js --project=chromium",
-    "test:prod:login": "cross-env TEST_ENV=production npx playwright test tests/login.spec.js --project=chromium"
+    "test:prod:login": "cross-env TEST_ENV=production npx playwright test tests/login.spec.js --project=chromium",
+    "test:docker": "docker run --rm --ipc=host -v \"%CD%:/app\" -w /app -e BASE_URL=https://the-internet.herokuapp.com -e LOGIN_USERNAME=tomsmith -e LOGIN_PASSWORD=SuperSecretPassword! -e TEST_ENV=staging mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash -c \"npm install && npx playwright test --project=chromium\"",
+    "postinstall": "npm update browserstack-node-sdk",
+    "test:staging-browserstack": "cross-env TEST_ENV=staging npx browserstack-node-sdk playwright test",
+    "test:prod-browserstack": "cross-env TEST_ENV=production npx browserstack-node-sdk playwright test",
+    "test:staging:login-browserstack": "cross-env TEST_ENV=staging npx browserstack-node-sdk playwright test tests/login.spec.js --project=chromium",
+    "test:prod:login-browserstack": "cross-env TEST_ENV=production npx browserstack-node-sdk playwright test tests/login.spec.js --project=chromium",
+    "test:docker-browserstack": "docker run --rm --ipc=host -v \"%CD%:/app\" -w /app -e BASE_URL=https://the-internet.herokuapp.com -e LOGIN_USERNAME=tomsmith -e LOGIN_PASSWORD=SuperSecretPassword! -e TEST_ENV=staging mcr.microsoft.com/playwright:v1.59.1-noble /bin/bash -c \"npm install && npx browserstack-node-sdk playwright test --project=chromium\""
   },
   "keywords": [],
   "author": "",
@@ -19,6 +26,7 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
+    "browserstack-node-sdk": "^1.53.0",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2"
   }
