@@ -1,3 +1,5 @@
+![Playwright Tests](https://github.com/lolahgrace/herokuapp-test-suite/actions/workflows/playwright.yml/badge.svg)
+
 # herokuapp-test-suite
 
 An automated test suite built using [Playwright](https://playwright.dev/) and JavaScript, targeting [The Internet by Herokuapp](https://the-internet.herokuapp.com/) and [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Tests are structured using the Page Object Model (POM) pattern and run across Chromium and Firefox browsers.
