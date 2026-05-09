@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test:staging": "cross-env TEST_ENV=staging npx playwright test",
+    "report": "allure serve allure-results",
     "test:prod": "cross-env TEST_ENV=production npx playwright test",
     "test:staging:login": "cross-env TEST_ENV=staging npx playwright test tests/login.spec.js --project=chromium",
     "test:prod:login": "cross-env TEST_ENV=production npx playwright test tests/login.spec.js --project=chromium",
@@ -26,6 +27,8 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
+    "allure-commandline": "^2.40.0",
+    "allure-playwright": "^3.7.2",
     "browserstack-node-sdk": "^1.53.0",
     "cross-env": "^10.1.0",
     "dotenv": "^17.4.2"
