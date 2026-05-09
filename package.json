@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test:staging": "cross-env TEST_ENV=staging npx playwright test",
-    "report": "allure serve allure-results",
+    "test:smoke": "cross-env TEST_ENV=staging npx playwright test --grep \"@smoke\"",
+    "test:regression": "cross-env TEST_ENV=staging npx playwright test --grep \"@regression\"",
+    "allure:clean": "rimraf allure-results",
+    "allure:report": "allure serve allure-results",
     "test:prod": "cross-env TEST_ENV=production npx playwright test",
     "test:staging:login": "cross-env TEST_ENV=staging npx playwright test tests/login.spec.js --project=chromium",
     "test:prod:login": "cross-env TEST_ENV=production npx playwright test tests/login.spec.js --project=chromium",
