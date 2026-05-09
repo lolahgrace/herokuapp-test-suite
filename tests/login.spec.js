@@ -33,7 +33,7 @@ const testData = {
 };
 
 test.describe("Authenticated user actions", () => {
-  test("User can login and logout successfully", async ({ loggedInPage }) => {
+  test("User can login and logout successfully @smoke @regression @auth", async ({ loggedInPage }) => {
     await test.step("Verify success message after login", async () => {
       const message = await loggedInPage.getFlashMessage();
       expect(message).toContain("You logged into a secure area!");
@@ -54,7 +54,7 @@ test.describe("Login functionality", () => {
     await loginPage.goto();
   });
 
-  test("User cannot login with invalid credentials", async ({ page }) => {
+  test("User cannot login with invalid credentials @regression @auth", async ({ page }) => {
     await test.step(
       "Attempt to login with invalid credentials and verify error message",
       async () => {
@@ -68,7 +68,7 @@ test.describe("Login functionality", () => {
     );
   });
 
-  test("User cannot login with valid username and invalid password", async ({
+  test("User cannot login with valid username and invalid password @regression @auth", async ({
     page,
   }) => {
     await test.step(
@@ -84,7 +84,7 @@ test.describe("Login functionality", () => {
     );
   });
 
-  test("User cannot login with invalid username and valid password", async ({
+  test("User cannot login with invalid username and valid password @regression @auth", async ({
     page,
   }) => {
     await test.step(
@@ -100,8 +100,8 @@ test.describe("Login functionality", () => {
     );
   });
 
-  test("User sees error when trying to login with empty fields", async ({
-    page,
+  test("User sees error when trying to login with empty fields @regression @auth", async ({
+  page,
   }) => {
     await test.step(
       "Attempt to login with empty fields and verify error message",
@@ -116,7 +116,7 @@ test.describe("Login functionality", () => {
     );
   });
 
-  test("User cannot login with trailing spaces in credentials", async ({
+  test("User cannot login with trailing spaces in credentials @regression @auth", async ({
     page,
   }) => {
     await test.step(
@@ -143,7 +143,7 @@ test.describe("Login functionality", () => {
     );
   });
 
-  test("Login page elements are visible and enabled", async ({ page }) => {
+  test("Login page elements are visible and enabled @smoke @auth", async ({ page }) => {
     await test.step("Verify initial state of login form", async () => {
       await expect(loginPage.usernameInput).toBeVisible();
       await expect(loginPage.passwordInput).toBeVisible();

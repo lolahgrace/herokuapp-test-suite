@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("API setup + API verification", async ({ request }) => {
+test("API setup + API verification @regression @api", async ({ request }) => {
   const createResponse = await request.post(
     "https://jsonplaceholder.typicode.com/posts",
     {

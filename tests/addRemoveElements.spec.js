@@ -9,13 +9,13 @@ test.describe("Testing functionality to add and remove elements", () => {
     await addRemoveElementsPage.goto();
   });
 
-  test("Should start with no delete buttons", async ({ page }) => {
+  test("Should start with no delete buttons @regression @ui", async ({ page }) => {
     await test.step("Verify no delete buttons on page load", async () => {
       await expect(addRemoveElementsPage.deleteButtons).toHaveCount(0);
     });
   });
 
-  test("Add a single element and verify one delete button appears", async ({
+  test("Add a single element and verify one delete button appears @regression @ui", async ({
     page,
   }) => {
     await test.step("Add single element", async () => {
@@ -26,7 +26,7 @@ test.describe("Testing functionality to add and remove elements", () => {
     });
   });
 
-  test("Add one element, delete it, verify it disappears", async ({ page }) => {
+  test("Add one element, delete it, verify it disappears @regression @ui", async ({ page }) => {
     await test.step("Add one element and delete it", async () => {
       await addRemoveElementsPage.addElements(1);
       await addRemoveElementsPage.deleteElements(1);
@@ -36,7 +36,7 @@ test.describe("Testing functionality to add and remove elements", () => {
     });
   });
 
-  test("Add multiple elements and verify correct count appears", async ({
+  test("Add multiple elements and verify correct count appears @regression @ui", async ({
     page,
   }) => {
     await test.step("Add multiple elements", async () => {
@@ -47,7 +47,7 @@ test.describe("Testing functionality to add and remove elements", () => {
     });
   });
 
-  test("Add multiple elements, delete some, verify correct count remains", async ({
+  test("Add multiple elements, delete some, verify correct count remains @regression @ui", async ({
     page,
   }) => {
     await test.step("Add multiple elements and delete some", async () => {
@@ -59,7 +59,7 @@ test.describe("Testing functionality to add and remove elements", () => {
     });
   });
 
-  test("Multiple elements removal, verify none remain", async ({ page }) => {
+  test("Multiple elements removal, verify none remain @regression @ui", async ({ page }) => {
     await test.step("Add elements and delete all", async () => {
       await addRemoveElementsPage.addElements(5);
       await addRemoveElementsPage.deleteElements(5);

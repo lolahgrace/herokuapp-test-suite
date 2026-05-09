@@ -16,14 +16,14 @@ test.describe("Dynamic controls functionality", () => {
     await dynamicControlsPage.goto();
   });
 
-  test("Verify checkbox is visible and input is disabled on page load", async ({
+  test("Verify checkbox is visible and input is disabled on page load @regression @ui", async ({
     page,
   }) => {
     await expect(dynamicControlsPage.checkbox).toBeVisible();
     await expect(dynamicControlsPage.inputField).toBeDisabled();
   });
 
-  test("Remove checkbox, wait and verify it is gone", async ({ page }) => {
+  test("Remove checkbox, wait and verify it is gone @regression @ui", async ({ page }) => {
     await test.step("Remove checkbox", async () => {
       await dynamicControlsPage.toggleCheckbox();
     });
@@ -38,7 +38,7 @@ test.describe("Dynamic controls functionality", () => {
     );
   });
 
-  test("Add checkbox back, wait and verify it is back", async ({ page }) => {
+  test("Add checkbox back, wait and verify it is back @regression @ui", async ({ page }) => {
     await test.step("Remove checkbox first and verify it is gone", async () => {
       await dynamicControlsPage.toggleCheckbox();
       await expect(dynamicControlsPage.checkbox).not.toBeVisible();
@@ -57,7 +57,7 @@ test.describe("Dynamic controls functionality", () => {
     );
   });
 
-  test("Click Enable input, wait, verify input is enabled", async ({
+  test("Click Enable input, wait, verify input is enabled @regression @ui", async ({
     page,
   }) => {
     await test.step("Click Enable input", async () => {
@@ -74,7 +74,7 @@ test.describe("Dynamic controls functionality", () => {
     );
   });
 
-  test("Click Disable input, wait and verify input is disabled", async ({
+  test("Click Disable input, wait and verify input is disabled @regression @ui", async ({
     page,
   }) => {
     await test.step(

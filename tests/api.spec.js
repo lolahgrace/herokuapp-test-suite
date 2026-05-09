@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test("GET single user", async ({ request }) => {
+test("GET single user @regression @api", async ({ request }) => {
   const response = await request.get(
     "https://jsonplaceholder.typicode.com/users/1",
   );
@@ -13,7 +13,7 @@ test("GET single user", async ({ request }) => {
   expect(body.email).toContain("@");
 });
 
-test("POST new post", async ({ request }) => {
+test("POST new post @regression @api", async ({ request }) => {
   const response = await request.post(
     "https://jsonplaceholder.typicode.com/posts",
     {
@@ -31,7 +31,7 @@ test("POST new post", async ({ request }) => {
   expect(body.title).toEqual("My Playwright Test Post");
 });
 
-test("DELETE a post", async ({ request }) => {
+test("DELETE a post @regression @api", async ({ request }) => {
   const response = await request.delete(
     "https://jsonplaceholder.typicode.com/posts/1",
   );

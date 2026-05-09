@@ -9,11 +9,11 @@ test.describe("File Download functionality", () => {
     await fileDownloadPage.goto();
   });
 
-  test("Verify files are listed on the page on page load", async () => {
+  test("Verify files are listed on the page on page load @regression @ui", async () => {
     await expect(fileDownloadPage.firstDownloadLink).toBeVisible();
   });
 
-  test("Click a file and verify the download actually happens", async () => {
+  test("Click a file and verify the download actually happens @regression @ui", async () => {
     let download;
     await test.step("Click a file", async () => {
       download = await fileDownloadPage.downloadFirstFile();

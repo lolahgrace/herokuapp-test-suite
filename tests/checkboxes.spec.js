@@ -20,7 +20,7 @@ test.describe("Checkbox functionality", () => {
     await checkboxPage.goto();
   });
 
-  test("Verifying the initial state of the checkboxes on page load", async ({
+  test("Verifying the initial state of the checkboxes on page load @regression @ui", async ({
     page,
   }) => {
     await test.step(
@@ -32,7 +32,7 @@ test.describe("Checkbox functionality", () => {
     );
   });
 
-  test("Checking checkbox 1 and verifying the state changed", async ({
+  test("Checking checkbox 1 and verifying the state changed @regression @ui", async ({
     page,
   }) => {
     await test.step("Attempt to check checkbox 1", async () => {
@@ -43,7 +43,7 @@ test.describe("Checkbox functionality", () => {
     });
   });
 
-  test("Unchecking checkbox 2 and verifying the state changed", async ({
+  test("Unchecking checkbox 2 and verifying the state changed @regression @ui", async ({
     page,
   }) => {
     await test.step("Attempt to uncheck checkbox 2", async () => {
@@ -54,7 +54,7 @@ test.describe("Checkbox functionality", () => {
     });
   });
 
-  test("Check both checkboxes and verify both are checked", async ({
+  test("Check both checkboxes and verify both are checked @regression @ui", async ({
     page,
   }) => {
     await test.step("Attempt to check both checkboxes", async () => {
@@ -73,7 +73,7 @@ test.describe("Checkbox functionality", () => {
     });
   });
 
-  test("Uncheck both checkboxes and verify both are unchecked", async ({
+  test("Uncheck both checkboxes and verify both are unchecked @regression @ui", async ({
     page,
   }) => {
     await test.step("Attempt to uncheck both checkboxes", async () => {

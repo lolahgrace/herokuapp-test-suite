@@ -13,7 +13,7 @@ test.describe("Javascripts alerts functionality", () => {
     await javascriptAlertsPage.goto();
   });
 
-  test("JS Alert - accept and verify", async ({ page }) => {
+  test("JS Alert - accept and verify @regression @ui", async ({ page }) => {
     await test.step("Click JS alert and accept", async () => {
       await javascriptAlertsPage.clickAlert();
     });
@@ -24,7 +24,7 @@ test.describe("Javascripts alerts functionality", () => {
     });
   });
 
-  test("JS Confirm - accept and verify", async ({ page }) => {
+  test("JS Confirm - accept and verify @regression @ui", async ({ page }) => {
     await test.step("Click JS Confirm and accept", async () => {
       await javascriptAlertsPage.clickConfirmOk();
     });
@@ -35,7 +35,7 @@ test.describe("Javascripts alerts functionality", () => {
     });
   });
 
-  test("JS Confirm - dismiss and verify", async ({ page }) => {
+  test("JS Confirm - dismiss and verify @regression @ui", async ({ page }) => {
     await test.step("Click JS Confirm and dismiss", async () => {
       await javascriptAlertsPage.clickConfirmCancel();
     });
@@ -46,7 +46,7 @@ test.describe("Javascripts alerts functionality", () => {
     });
   });
 
-  test("JS Prompt - type text, accept and verify text appears", async ({
+  test("JS Prompt - type text, accept and verify text appears @regression @ui", async ({
     page,
   }) => {
     await test.step("Click JS Prompt and type text", async () => {
@@ -59,7 +59,7 @@ test.describe("Javascripts alerts functionality", () => {
     });
   });
 
-  test("JS prompt - cancel and verify null message", async ({ page }) => {
+  test("JS prompt - cancel and verify null message @regression @ui", async ({ page }) => {
     await test.step("Click JS Prompt and cancel", async () => {
       await javascriptAlertsPage.clickPromptCancel();
     });

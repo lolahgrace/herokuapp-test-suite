@@ -8,7 +8,7 @@ test.describe("Dynamic Loading functionality", () => {
     dynamicLoadingPage = new DynamicLoadingPage(page);
   });
 
-  test("Verify finish text is hidden on page load (example 1)", async ({
+  test("Verify finish text is hidden on page load (example 1) @regression @ui", async ({
     page,
   }) => {
     await test.step("Navigate to Example 1", async () => {
@@ -22,7 +22,7 @@ test.describe("Dynamic Loading functionality", () => {
     );
   });
 
-  test("Transition hidden element to be visible (example 1)", async ({
+  test("Transition hidden element to be visible (example 1) @regression @ui", async ({
     page,
   }) => {
     await test.step("Navigate to Example 1", async () => {
@@ -37,7 +37,7 @@ test.describe("Dynamic Loading functionality", () => {
     });
   });
 
-  test("Verify finish text is hidden on page load (example 2)", async ({
+  test("Verify finish text is hidden on page load (example 2) @regression @ui", async ({
     page,
   }) => {
     await test.step("Navigate to Example 2", async () => {
@@ -51,7 +51,7 @@ test.describe("Dynamic Loading functionality", () => {
     );
   });
 
-  test("Verify element is rendered after loading (Example 2)", async ({
+  test("Verify element is rendered after loading (Example 2) @regression @ui", async ({
     page,
   }) => {
     await test.step("Navigate to Example 2", async () => {

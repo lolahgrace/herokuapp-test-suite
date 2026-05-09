@@ -16,7 +16,7 @@ test.describe("Number inputs functionality", () => {
     await inputsPage.goto();
   });
 
-  test("Enter a valid number and verify it appears in the field", async ({
+  test("Enter a valid number and verify it appears in the field @regression @ui", async ({
     page,
   }) => {
     await test.step("Enter a valid number", async () => {
@@ -27,7 +27,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Enter a negative number and verify it is accepted", async ({
+  test("Enter a negative number and verify it is accepted @regression @ui", async ({
     page,
   }) => {
     await test.step("Enter a negative number", async () => {
@@ -40,7 +40,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Clear the input and verify the field is empty", async ({ page }) => {
+  test("Clear the input and verify the field is empty @regression @ui", async ({ page }) => {
     await test.step("Input a valid number", async () => {
       await inputsPage.pressNumbers(testData.validNumber);
     });
@@ -50,7 +50,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Handle increment via arrow keys", async ({ page }) => {
+  test("Handle increment via arrow keys @regression @ui", async ({ page }) => {
     await test.step("Input value and add increment", async () => {
       await inputsPage.pressNumbers(testData.validNumber);
       await inputsPage.pressArrow("ArrowUp");
@@ -62,7 +62,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Handle decrement via arrow keys", async ({ page }) => {
+  test("Handle decrement via arrow keys @regression @ui", async ({ page }) => {
     await test.step("Input value and add decrement", async () => {
       await inputsPage.pressNumbers(testData.validNumber);
       await inputsPage.pressArrow("ArrowDown");
@@ -74,7 +74,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Type alphabets and verify field rejects them", async ({ page }) => {
+  test("Type alphabets and verify field rejects them @regression @ui", async ({ page }) => {
     await test.step("Type in alphabets", async () => {
       await inputsPage.pressNumbers(testData.alphabetInput);
     });
@@ -83,7 +83,7 @@ test.describe("Number inputs functionality", () => {
     });
   });
 
-  test("Type special characters and verify field rejects them", async ({
+  test("Type special characters and verify field rejects them @regression @ui", async ({
     page,
   }) => {
     await test.step("Type in special characters", async () => {

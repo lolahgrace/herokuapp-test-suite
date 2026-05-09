@@ -12,7 +12,7 @@ test.describe("Hovers functionality", () => {
   });
 
   for (const userNumber of users) {
-    test(`Hover over user ${userNumber} - verify info hidden before and visible after`, async ({
+    test(`Hover over user ${userNumber} - verify info hidden before and visible after @regression @ui`, async ({
       page,
     }) => {
       const index = userNumber - 1;
@@ -31,7 +31,7 @@ test.describe("Hovers functionality", () => {
   }
 
   for (const userNumber of users) {
-    test(`Click "View profile" for user ${userNumber} and verify navigation`, async ({
+    test(`Click "View profile" for user ${userNumber} and verify navigation @regression @ui`, async ({
       page,
     }) => {
       const index = userNumber - 1;
@@ -48,7 +48,7 @@ test.describe("Hovers functionality", () => {
     });
   }
 
-  test("Switch hover from user 1 to user 2 - verify info toggles correctly", async ({
+  test("Switch hover from user 1 to user 2 - verify info toggles correctly @regression @ui", async ({
     page,
   }) => {
     await test.step("Hover over user 1 and verify visibility", async () => {

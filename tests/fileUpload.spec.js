@@ -13,7 +13,7 @@ test.describe("File Upload Functionality", () => {
     await fileUploadPage.goto();
   });
 
-  test("Verify successful upload of a file", async () => {
+  test("Verify successful upload of a file @regression @ui", async () => {
     await test.step("Verify the initial state on page load", async () => {
       await expect(fileUploadPage.chooseFileInput).toBeVisible();
       await expect(fileUploadPage.chooseFileInput).toHaveValue("");
@@ -29,7 +29,7 @@ test.describe("File Upload Functionality", () => {
     });
   });
 
-  test('Verify the "Drag and Drop" area works as an alternative to the button', async () => {
+  test('Verify the "Drag and Drop" area works as an alternative to the button @regression @ui', async () => {
     await test.step("Drop the file", async () => {
       await fileUploadPage.uploadViaDragAndDrop(filePath.full);
     });
@@ -38,7 +38,7 @@ test.describe("File Upload Functionality", () => {
     });
   });
 
-  test("Attempt to upload an empty file, 0kb", async () => {
+  test("Attempt to upload an empty file, 0kb @regression @ui", async () => {
     await test.step("Upload empty file via upload button", async () => {
       await fileUploadPage.uploadViaButton(filePath.empty);
     });
@@ -49,7 +49,7 @@ test.describe("File Upload Functionality", () => {
     });
   });
 
-  test("Attempt upload without selecting a file", async () => {
+  test("Attempt upload without selecting a file @regression @ui", async () => {
     await test.step("Click upload", async () => {
       await fileUploadPage.uploadButton.click();
     });

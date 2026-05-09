@@ -14,7 +14,7 @@ test.describe("Dropdown functionality", () => {
     await dropdownPage.goto();
   });
 
-  test("Verify dropdown defaults to placeholder and options are unselected on load", async ({
+  test("Verify dropdown defaults to placeholder and options are unselected on load @regression @ui", async ({
     page,
   }) => {
     await test.step(
@@ -27,7 +27,7 @@ test.describe("Dropdown functionality", () => {
       },
     );
   });
-  test("Select option one and verify it is selected", async ({ page }) => {
+  test("Select option one and verify it is selected @regression @ui", async ({ page }) => {
     await test.step("Select option one", async () => {
       await dropdownPage.chooseOption(testData.optionOne);
     });
@@ -36,7 +36,7 @@ test.describe("Dropdown functionality", () => {
     });
   });
 
-  test("Select option two and verify it is selected", async ({ page }) => {
+  test("Select option two and verify it is selected @regression @ui", async ({ page }) => {
     await test.step("Select option two", async () => {
       await dropdownPage.chooseOption(testData.optionTwo);
     });
@@ -45,7 +45,7 @@ test.describe("Dropdown functionality", () => {
     });
   });
 
-  test("Select option one, then option two, and verify the switch to option two", async ({
+  test("Select option one, then option two, and verify the switch to option two @regression @ui", async ({
     page,
   }) => {
     await test.step("Select option one", async () => {
