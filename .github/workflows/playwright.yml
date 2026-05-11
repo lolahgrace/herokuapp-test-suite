@@ -38,10 +38,22 @@ jobs:
           LOGIN_PASSWORD: ${{ secrets.LOGIN_PASSWORD }}
           TEST_ENV: staging 
 
-          
+
       - name: Generate Allure Report
         if: always()
         run: npx allure generate allure-results --clean -o allure-report
+
+      - name: Install Allure CLI
+        if: always()
+        run: npm install -g allure-commandline
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 30
 
       - name: Upload Playwright report
         uses: actions/upload-artifact@v4
@@ -51,13 +63,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
       
-      - name: Upload Allure Results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: allure-results
-          path: allure-results/
-          retention-days: 30
+      
 
     
 
