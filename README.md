@@ -2,21 +2,29 @@
 
 # herokuapp-test-suite
 
-An automated test suite built using [Playwright](https://playwright.dev/) and JavaScript, targeting [The Internet by Herokuapp](https://the-internet.herokuapp.com/) and [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Tests are structured using the Page Object Model (POM) pattern and run across Chromium and Firefox browsers.
+> A professional-grade test automation suite built from scratch — covering UI, API, hybrid, and network testing with CI/CD, cloud execution, and stakeholder-ready reporting.
+
+An automated test suite built using [Playwright](https://playwright.dev/) and JavaScript, targeting [The Internet by Herokuapp](https://the-internet.herokuapp.com/) and [JSONPlaceholder](https://jsonplaceholder.typicode.com/). Tests are structured using the Page Object Model (POM) pattern, run across Chromium and Firefox browsers, and execute automatically on every push via GitHub Actions.
 
 ---
 
 ## Key Highlights
 
 - **Page Object Model (POM):** Decoupled test logic from UI selectors for high maintainability.
-- **Semantic Reporting:** Utilizes `test.step` to provide human-readable audit logs in HTML reports.
-- **Comprehensive Test Coverage:** Includes Happy Path, Sad Path (negative testing), and UI-state validation.
-- **Data-Driven Design:** Test scenarios are driven by centralized data objects to ensure clean, DRY code.
-- **Playwright Fixtures:** Reusable `loggedInPage` fixture injects authenticated state into tests, eliminating repetitive login setup across the suite.
-- **Multi-Environment Configuration:** Suite supports staging and production environments via `.env` and `cross-env`, switchable with a single npm script.
-- **API & Hybrid Testing:** Includes dedicated API tests using Playwright's `request` fixture and hybrid tests combining API creation with response verification.
-- **Automated Cleanup:** `test.afterEach` hook captures screenshots on failure and clears cookies after every test run.
-- **Trace Viewer Ready:** Playwright traces are captured on first retry, providing step-by-step visual debugging for failed tests.
+- **Semantic Reporting:** Utilises `test.step` to provide human-readable audit logs in HTML and Allure reports.
+- **Comprehensive Test Coverage:** Includes Happy Path, Sad Path (negative testing), edge cases, and UI-state validation.
+- **Data-Driven Design:** Test scenarios driven by centralised data objects for clean, DRY code.
+- **Playwright Fixtures:** Reusable `loggedInPage` fixture injects authenticated state into tests, eliminating repetitive login setup.
+- **Multi-Environment Configuration:** Supports staging and production environments via `.env` and `cross-env`, switchable with a single npm script.
+- **API & Hybrid Testing:** Dedicated API tests using Playwright's `request` fixture, plus hybrid tests combining API setup with UI verification.
+- **Network Mocking:** Uses `page.route()` to intercept and stub network requests — testing error states, loading states, and data scenarios without depending on live APIs.
+- **Test Tagging:** Tests are tagged (`@smoke`, `@regression`, `@auth`, `@api`, `@network`, `@ui`) for filtered execution by pipeline stage or feature area.
+- **CI/CD Pipeline:** GitHub Actions workflow runs the full suite on every push to main, on pull requests, and on a nightly schedule.
+- **Cloud Testing:** BrowserStack Automate integration for cross-browser cloud execution.
+- **Containerised Execution:** Docker support for consistent test runs across environments using the official Microsoft Playwright image.
+- **Allure Reporting:** Allure Reporter generates interactive dashboards with test history, steps, attachments, and failure details — readable by both technical and non-technical stakeholders.
+- **Automated Cleanup:** `test.afterEach` hook captures screenshots on failure and clears cookies after every test.
+- **Trace Viewer Ready:** Playwright traces captured on first retry for step-by-step visual debugging.
 
 ---
 
@@ -24,41 +32,45 @@ An automated test suite built using [Playwright](https://playwright.dev/) and Ja
 
 ```
 herokuapp-test-suite/
+├── .github/
+│   └── workflows/
+│       └── playwright.yml           # GitHub Actions CI pipeline
 ├── fixtures/                        # Test fixture files
 │   ├── index.js                     # loggedInPage fixture — reusable authenticated state
 │   ├── test-file.txt                # Sample file for upload tests
 │   └── empty.txt                    # Empty file for edge case upload tests
 ├── pages/                           # Page Object Model files
-│   ├── LoginPage.js                 # Login page actions and locators
-│   ├── CheckboxPage.js              # Checkbox page actions and locators
-│   ├── DropdownPage.js              # Dropdown page actions and locators
-│   ├── InputsPage.js                # Inputs page actions and locators
-│   ├── AddRemoveElementsPage.js     # Add/Remove Elements page actions and locators
-│   ├── JavascriptAlertsPage.js      # JavaScript Alerts page actions and locators
-│   ├── HoversPage.js                # Hovers page actions and locators
-│   ├── DynamicControlsPage.js       # Dynamic Controls page actions and locators
-│   ├── DynamicLoadingPage.js        # Dynamic Loading page actions and locators
-│   ├── FileUploadPage.js            # File Upload page actions and locators
-│   ├── FileDownloadPage.js          # File Download page actions and locators
-│   ├── BrokenImagesPage.js          # Broken Images page actions and locators
-│   └── FramesPage.js                # Frames (iFrame) page actions and locators
+│   ├── LoginPage.js
+│   ├── CheckboxPage.js
+│   ├── DropdownPage.js
+│   ├── InputsPage.js
+│   ├── AddRemoveElementsPage.js
+│   ├── JavascriptAlertsPage.js
+│   ├── HoversPage.js
+│   ├── DynamicControlsPage.js
+│   ├── DynamicLoadingPage.js
+│   ├── FileUploadPage.js
+│   ├── FileDownloadPage.js
+│   ├── BrokenImagesPage.js
+│   └── FramesPage.js
 ├── tests/                           # Test spec files
 │   ├── login.spec.js                # Login functionality tests
 │   ├── api.spec.js                  # API tests using Playwright request fixture
 │   ├── hybrid.spec.js               # Hybrid tests combining API and UI verification
-│   ├── checkboxes.spec.js           # Checkbox functionality tests
-│   ├── dropdown.spec.js             # Dropdown functionality tests
-│   ├── inputs.spec.js               # Inputs functionality tests
-│   ├── addRemoveElements.spec.js    # Add/Remove Elements functionality tests
-│   ├── javascriptAlerts.spec.js     # JavaScript Alerts functionality tests
-│   ├── hovers.spec.js               # Hovers functionality tests
-│   ├── dynamicControls.spec.js      # Dynamic Controls functionality tests
-│   ├── dynamicLoading.spec.js       # Dynamic Loading functionality tests
-│   ├── fileUpload.spec.js           # File Upload functionality tests
-│   ├── fileDownload.spec.js         # File Download functionality tests
-│   ├── brokenImages.spec.js         # Broken Images functionality tests
-│   └── frames.spec.js               # Frames (iFrame) functionality tests
-├── .env.example                     # Public-safe template for required environment variables
+│   ├── networkMocking.spec.js       # Network interception and stubbing tests
+│   ├── checkboxes.spec.js
+│   ├── dropdown.spec.js
+│   ├── inputs.spec.js
+│   ├── addRemoveElements.spec.js
+│   ├── javascriptAlerts.spec.js
+│   ├── hovers.spec.js
+│   ├── dynamicControls.spec.js
+│   ├── dynamicLoading.spec.js
+│   ├── fileUpload.spec.js
+│   ├── fileDownload.spec.js
+│   ├── brokenImages.spec.js         # Skipped in CI (live image detection)
+│   └── frames.spec.js
+├── .env.example                     # Public-safe template for environment variables
 ├── playwright.config.js             # Playwright configuration
 ├── package.json
 └── README.md
@@ -83,13 +95,40 @@ Environment switching is handled via `cross-env` in npm scripts — no code chan
 
 ### Fixtures
 
-The `loggedInPage` fixture in `fixtures/index.js` handles authentication setup and teardown automatically. Tests that require an authenticated state request this fixture instead of repeating login steps manually:
+The `loggedInPage` fixture in `fixtures/index.js` handles authentication setup automatically. Tests that require an authenticated state request this fixture instead of repeating login steps manually:
 
 ```javascript
 test('example', async ({ loggedInPage }) => {
   // already logged in — test starts on secure page
 })
 ```
+
+### Network Mocking
+
+`page.route()` intercepts browser-level requests before they reach the server. This allows tests to simulate error responses, timeouts, and custom payloads without depending on live API behaviour:
+
+```javascript
+await page.route('**/api/endpoint', route => {
+  route.fulfill({ status: 500, body: 'Server Error' })
+})
+```
+
+### Test Tagging
+
+Tests are tagged inside their title strings for filtered execution:
+
+```javascript
+test('User can login successfully @smoke @auth', async ({ page }) => { ... })
+```
+
+| Tag | Purpose |
+|---|---|
+| `@smoke` | Critical path — run after every deployment |
+| `@regression` | Full coverage — run before every release |
+| `@auth` | Authentication feature area |
+| `@api` | API tests |
+| `@network` | Network mocking tests |
+| `@ui` | UI-only tests |
 
 ### Cleanup
 
@@ -99,7 +138,43 @@ A `test.afterEach` hook runs after every test:
 
 ### Trace Viewer
 
-Traces are configured with `on-first-retry` — automatically recorded when a test fails and retries. Open traces via the HTML report for step-by-step visual debugging, network request inspection, and DOM snapshots at each action.
+Traces are configured with `on-first-retry` — automatically recorded when a test fails and retries. Open via the HTML report for step-by-step visual debugging, network request inspection, and DOM snapshots at each action.
+
+---
+
+## CI/CD Pipeline
+
+Tests run automatically via GitHub Actions on:
+- Every push to `main`
+- Every pull request targeting `main`
+- A nightly scheduled run (`0 0 * * *`)
+- Manual trigger via `workflow_dispatch`
+
+Sensitive credentials are stored as GitHub Secrets. The pipeline uploads both Playwright and Allure reports as downloadable artifacts after every run.
+
+---
+
+## Cloud & Container Testing
+
+### BrowserStack
+
+The suite integrates with BrowserStack Automate via the BrowserStack Node SDK for cloud-based cross-browser execution:
+
+```bash
+npm run test:staging-browserstack
+```
+
+Credentials are stored in `.env` and `browserstack.yml` (both gitignored).
+
+### Docker
+
+Run the full suite in a containerised environment using the official Microsoft Playwright image:
+
+```bash
+npm run test:docker
+```
+
+This ensures consistent execution regardless of local machine configuration.
 
 ---
 
@@ -107,140 +182,148 @@ Traces are configured with `on-first-retry` — automatically recorded when a te
 
 ### ✅ Login Page (`/login`)
 
-| Test Case | Description |
-|---|---|
-| Valid login and logout | Logs in with correct credentials, verifies success message, logs out |
-| Invalid credentials | Both username and password are wrong |
-| Valid username, invalid password | Verifies password-specific error message |
-| Invalid username, valid password | Verifies username-specific error message |
-| Empty fields | Submits form with no input |
-| Trailing spaces in username | Username with trailing whitespace |
-| Trailing spaces in password | Password with trailing whitespace |
-| UI visibility checks | Verifies form fields and button are visible and enabled |
+| Test Case | Tags | Description |
+|---|---|---|
+| Valid login and logout | `@smoke @regression @auth` | Logs in with correct credentials, verifies success message, logs out |
+| Invalid credentials | `@regression @auth` | Both username and password are wrong |
+| Valid username, invalid password | `@regression @auth` | Verifies password-specific error message |
+| Invalid username, valid password | `@regression @auth` | Verifies username-specific error message |
+| Empty fields | `@regression @auth` | Submits form with no input |
+| Trailing spaces in username | `@regression @auth` | Username with trailing whitespace |
+| Trailing spaces in password | `@regression @auth` | Password with trailing whitespace |
+| UI visibility checks | `@smoke @auth` | Verifies form fields and button are visible and enabled |
 
 ### ✅ API Tests (JSONPlaceholder)
 
-| Test Case | Description |
-|---|---|
-| GET single user | Fetches user by ID, verifies status 200, id, name, and email format |
-| POST new post | Creates a post, verifies status 201, id exists, and title matches |
-| DELETE a post | Deletes a post by ID, verifies status 200 |
+| Test Case | Tags | Description |
+|---|---|---|
+| GET single user | `@regression @api` | Fetches user by ID, verifies status 200, id, name, and email format |
+| POST new post | `@regression @api` | Creates a post, verifies status 201, id exists, and title matches |
+| DELETE a post | `@regression @api` | Deletes a post by ID, verifies status 200 |
 
 ### ✅ Hybrid Tests (JSONPlaceholder)
 
-| Test Case | Description |
-|---|---|
-| Create then verify via API | POSTs a new resource, asserts 201, verifies all response fields match the sent data |
+| Test Case | Tags | Description |
+|---|---|---|
+| Create then verify via API | `@regression @api` | POSTs a new resource, asserts 201, verifies all response fields match sent data |
+
+### ✅ Network Mocking Tests
+
+| Test Case | Tags | Description |
+|---|---|---|
+| Fulfilled response mock | `@smoke @regression @network` | Intercepts request and returns stubbed success response |
+| Aborted request mock | `@smoke @regression @network` | Intercepts request and simulates network failure |
+| Error state mock | `@smoke @regression @network` | Returns 500 error response and verifies UI handles it correctly |
 
 ### ✅ Checkboxes Page (`/checkboxes`)
 
-| Test Case | Description |
-|---|---|
-| Initial state verification | Verifies checkbox 1 is unchecked and checkbox 2 is checked on page load |
-| Check checkbox 1 | Checks checkbox 1 and verifies state changed to checked |
-| Uncheck checkbox 2 | Unchecks checkbox 2 and verifies state changed to unchecked |
-| Check both checkboxes | Checks both checkboxes and verifies both are checked |
-| Uncheck both checkboxes | Unchecks both checkboxes and verifies both are unchecked |
+| Test Case | Tags | Description |
+|---|---|---|
+| Initial state verification | `@regression @ui` | Verifies checkbox 1 is unchecked and checkbox 2 is checked on page load |
+| Check checkbox 1 | `@regression @ui` | Checks checkbox 1 and verifies state changed |
+| Uncheck checkbox 2 | `@regression @ui` | Unchecks checkbox 2 and verifies state changed |
+| Check both checkboxes | `@regression @ui` | Checks both and verifies both are checked |
+| Uncheck both checkboxes | `@regression @ui` | Unchecks both and verifies both are unchecked |
 
 ### ✅ Dropdown Page (`/dropdown`)
 
-| Test Case | Description |
-|---|---|
-| Initial state verification | Verifies dropdown defaults to placeholder and no option is pre-selected on page load |
-| Select option 1 | Selects option 1 and verifies it is selected |
-| Select option 2 | Selects option 2 and verifies it is selected |
-| Switch from option 1 to option 2 | Selects option 1, switches to option 2, and verifies the selection updated correctly |
+| Test Case | Tags | Description |
+|---|---|---|
+| Initial state verification | `@regression @ui` | Verifies dropdown defaults to placeholder on page load |
+| Select option 1 | `@regression @ui` | Selects option 1 and verifies it is selected |
+| Select option 2 | `@regression @ui` | Selects option 2 and verifies it is selected |
+| Switch from option 1 to option 2 | `@regression @ui` | Verifies selection updates correctly when switching |
 
 ### ✅ Inputs Page (`/inputs`)
 
-| Test Case | Description |
-|---|---|
-| Enter a valid number | Types a valid number and verifies it appears in the field |
-| Enter a negative number | Types a negative number and verifies it is accepted |
-| Clear the input | Enters a number, clears the field, and verifies it is empty |
-| Increment via arrow key | Types a number, presses ArrowUp, and verifies the value increased by 1 |
-| Decrement via arrow key | Types a number, presses ArrowDown, and verifies the value decreased by 1 |
-| Reject alphabets | Types alphabetic characters and verifies the field rejects them |
-| Reject special characters | Types special characters and verifies the field rejects them |
+| Test Case | Tags | Description |
+|---|---|---|
+| Enter a valid number | `@regression @ui` | Types a valid number and verifies it appears |
+| Enter a negative number | `@regression @ui` | Types a negative number and verifies it is accepted |
+| Clear the input | `@regression @ui` | Enters a number, clears the field, verifies it is empty |
+| Increment via arrow key | `@regression @ui` | Presses ArrowUp and verifies value increased by 1 |
+| Decrement via arrow key | `@regression @ui` | Presses ArrowDown and verifies value decreased by 1 |
+| Reject alphabets | `@regression @ui` | Types alphabetic characters and verifies the field rejects them |
+| Reject special characters | `@regression @ui` | Types special characters and verifies the field rejects them |
 
 ### ✅ Add/Remove Elements Page (`/add_remove_elements`)
 
-| Test Case | Description |
-|---|---|
-| Initial state verification | Verifies no delete buttons are present on page load |
-| Add a single element | Clicks Add Element once and verifies one delete button appears |
-| Delete an element | Adds one element, deletes it, and verifies it disappears |
-| Add multiple elements | Adds multiple elements and verifies the correct count appears |
-| Delete one of multiple elements | Adds multiple elements, deletes one, and verifies the correct count remains |
-| Remove all elements | Adds multiple elements, deletes all, and verifies none remain |
+| Test Case | Tags | Description |
+|---|---|---|
+| Initial state verification | `@regression @ui` | Verifies no delete buttons present on page load |
+| Add a single element | `@regression @ui` | Clicks Add Element once, verifies one delete button appears |
+| Delete an element | `@regression @ui` | Adds one element, deletes it, verifies it disappears |
+| Add multiple elements | `@regression @ui` | Adds multiple elements, verifies correct count |
+| Delete one of multiple | `@regression @ui` | Adds multiple, deletes one, verifies correct count remains |
+| Remove all elements | `@regression @ui` | Adds multiple, deletes all, verifies none remain |
 
 ### ✅ JavaScript Alerts Page (`/javascript_alerts`)
 
-| Test Case | Description |
-|---|---|
-| JS Alert — accept and verify | Clicks JS Alert, accepts it, and verifies the result message |
-| JS Confirm — accept and verify | Clicks JS Confirm, accepts it, and verifies "You clicked: Ok" |
-| JS Confirm — dismiss and verify | Clicks JS Confirm, dismisses it, and verifies "You clicked: Cancel" |
-| JS Prompt — type and accept | Clicks JS Prompt, types text, accepts, and verifies the entered text appears |
-| JS Prompt — cancel and verify | Clicks JS Prompt, cancels, and verifies "You entered: null" |
+| Test Case | Tags | Description |
+|---|---|---|
+| JS Alert — accept | `@regression @ui` | Accepts alert and verifies result message |
+| JS Confirm — accept | `@regression @ui` | Accepts confirm and verifies "You clicked: Ok" |
+| JS Confirm — dismiss | `@regression @ui` | Dismisses confirm and verifies "You clicked: Cancel" |
+| JS Prompt — type and accept | `@regression @ui` | Types text, accepts, verifies entered text appears |
+| JS Prompt — cancel | `@regression @ui` | Cancels prompt and verifies "You entered: null" |
 
 ### ✅ Hovers Page (`/hovers`)
 
-| Test Case | Description |
-|---|---|
-| Hover over each user (loop) | Verifies user info is hidden before hover and visible after hover for all 3 users |
-| Click "View profile" for each user (loop) | Hovers over each user, clicks "View profile", and verifies navigation to correct URL |
-| Switch hover from user 1 to user 2 | Verifies user 1's info hides and user 2's info appears when switching hover |
+| Test Case | Tags | Description |
+|---|---|---|
+| Hover over each user | `@regression @ui` | Verifies user info hidden before hover, visible after for all 3 users |
+| Click "View profile" for each user | `@regression @ui` | Hovers, clicks View profile, verifies correct URL navigation |
+| Switch hover between users | `@regression @ui` | Verifies user 1 info hides and user 2 info appears when switching |
 
 ### ✅ Dynamic Controls Page (`/dynamic_controls`)
 
-| Test Case | Description |
-|---|---|
-| Initial state verification | Verifies checkbox is visible and input field is disabled on page load |
-| Remove checkbox | Clicks Remove, waits, and verifies checkbox is gone and "It's gone!" message appears |
-| Add checkbox back | Removes checkbox first, then adds it back, and verifies "It's back!" message appears |
-| Enable input | Clicks Enable, waits, and verifies input is enabled and "It's enabled!" message appears |
-| Disable input | Enables input first, then disables it, and verifies "It's disabled!" message appears |
+| Test Case | Tags | Description |
+|---|---|---|
+| Initial state verification | `@regression @ui` | Verifies checkbox visible and input disabled on page load |
+| Remove checkbox | `@regression @ui` | Clicks Remove, verifies checkbox gone and message appears |
+| Add checkbox back | `@regression @ui` | Removes then restores checkbox, verifies "It's back!" message |
+| Enable input | `@regression @ui` | Clicks Enable, verifies input enabled and message appears |
+| Disable input | `@regression @ui` | Enables then disables input, verifies "It's disabled!" message |
 
 ### ✅ Dynamic Loading Page (`/dynamic_loading`)
 
-| Test Case | Description |
-|---|---|
-| Example 1 — initial state | Verifies finish text exists in DOM but is hidden on page load |
-| Example 1 — reveal hidden element | Clicks Start, waits for loading, and verifies "Hello World!" becomes visible |
-| Example 2 — initial state | Verifies finish text does not exist in the DOM on page load |
-| Example 2 — render new element | Clicks Start, waits for loading, and verifies "Hello World!" is created and visible |
+| Test Case | Tags | Description |
+|---|---|---|
+| Example 1 — initial state | `@regression @ui` | Verifies finish text exists in DOM but is hidden |
+| Example 1 — reveal element | `@regression @ui` | Clicks Start, waits, verifies "Hello World!" becomes visible |
+| Example 2 — initial state | `@regression @ui` | Verifies finish text does not exist in DOM on page load |
+| Example 2 — render element | `@regression @ui` | Clicks Start, waits, verifies "Hello World!" is created and visible |
 
 ### ✅ File Upload Page (`/upload`)
 
-| Test Case | Description |
-|---|---|
-| Successful file upload | Verifies initial state, uploads a file via button, and confirms "File Uploaded!" message |
-| Drag and drop upload | Uploads a file via the drag and drop zone and verifies the file name appears |
-| Empty file upload | Uploads a 0kb empty file and verifies it is accepted |
-| Upload without selecting a file | Clicks Upload with no file selected and verifies error page appears |
+| Test Case | Tags | Description |
+|---|---|---|
+| Successful file upload | `@regression @ui` | Uploads file via button, confirms "File Uploaded!" message |
+| Drag and drop upload | `@regression @ui` | Uploads via drag and drop zone, verifies file name appears |
+| Empty file upload | `@regression @ui` | Uploads 0kb file and verifies it is accepted |
+| Upload without selecting file | `@regression @ui` | Clicks Upload with no file selected, verifies error page |
 
 ### ✅ File Download Page (`/download`)
 
-| Test Case | Description |
-|---|---|
-| Files listed on page load | Verifies download links are visible on page load |
-| Download a file | Clicks a file link and verifies the download event is triggered |
-| File name matches link | Verifies the downloaded file name matches the link that was clicked |
+| Test Case | Tags | Description |
+|---|---|---|
+| Files listed on page load | `@regression @ui` | Verifies download links visible on page load |
+| Download a file | `@regression @ui` | Clicks file link and verifies download event is triggered |
+| File name matches link | `@regression @ui` | Verifies downloaded file name matches the clicked link |
 
 ### ✅ Broken Images Page (`/broken_images`)
 
-| Test Case | Description |
-|---|---|
-| Detect broken images | Loops through all images, uses browser-native `naturalWidth` to detect broken ones, and reports each failure individually using soft assertions |
+| Test Case | Tags | Description |
+|---|---|---|
+| Detect broken images | `@regression @ui` | Loops all images, uses `naturalWidth` to detect broken ones, reports each failure individually via soft assertions. Skipped in CI. |
 
 ### ✅ Frames — iFrame Page (`/iframe`)
 
-| Test Case | Description |
-|---|---|
-| Verify editor is accessible | Switches into the iFrame and verifies the TinyMCE editor body is visible |
-| Type text inside iFrame editor | Clears existing content, types new text, and verifies it appears correctly |
-| Verify main page context | Confirms the outer page header is accessible after iFrame interaction |
+| Test Case | Tags | Description |
+|---|---|---|
+| Verify editor accessible | `@regression @ui` | Switches into iFrame, verifies TinyMCE editor body is visible |
+| Type text inside iFrame | `@regression @ui` | Clears content, types new text, verifies it appears correctly |
+| Verify main page context | `@regression @ui` | Confirms outer page header accessible after iFrame interaction |
 
 ---
 
@@ -268,65 +351,73 @@ Copy `.env.example` to `.env` and populate with your values:
 cp .env.example .env
 ```
 
-### Running Tests
+---
 
-Run all tests across all configured browsers:
+## Running Tests
 
+### All tests
 ```bash
 npx playwright test
 ```
 
-Run tests against a specific environment:
-
+### By environment
 ```bash
 npm run test:staging
 npm run test:prod
 ```
 
-Run a specific test file against staging:
-
+### By tag
 ```bash
-npm run test:staging:login
-npm run test:prod:login
+npm run test:smoke
+npm run test:regression
+npx playwright test --grep "@auth"
+npx playwright test --grep "@api"
+npx playwright test --grep "@network"
+npx playwright test --grep "@ui"
 ```
 
-Run tests in a specific browser:
-
+### By browser
 ```bash
 npx playwright test --project=chromium
 npx playwright test --project=firefox
 ```
 
-Run a specific test file:
-
+### By file
 ```bash
 npx playwright test tests/login.spec.js
 npx playwright test tests/api.spec.js
-npx playwright test tests/hybrid.spec.js
-npx playwright test tests/checkboxes.spec.js
-npx playwright test tests/dropdown.spec.js
-npx playwright test tests/inputs.spec.js
-npx playwright test tests/addRemoveElements.spec.js
-npx playwright test tests/javascriptAlerts.spec.js
-npx playwright test tests/hovers.spec.js
-npx playwright test tests/dynamicControls.spec.js
-npx playwright test tests/dynamicLoading.spec.js
-npx playwright test tests/fileUpload.spec.js
-npx playwright test tests/fileDownload.spec.js
-npx playwright test tests/brokenImages.spec.js
-npx playwright test tests/frames.spec.js
+npx playwright test tests/networkMocking.spec.js
 ```
 
-Run with the Playwright UI (interactive mode):
-
+### Interactive mode
 ```bash
 npx playwright test --ui
 ```
 
-### Viewing the Report
+### In Docker
+```bash
+npm run test:docker
+```
 
+### On BrowserStack
+```bash
+npm run test:staging-browserstack
+```
+
+---
+
+## Viewing Reports
+
+### Playwright HTML Report
 ```bash
 npx playwright show-report
+```
+
+### Allure Report
+```bash
+npm run allure:clean
+npx playwright test
+npm run allure:report
 ```
 
 ---
@@ -336,10 +427,13 @@ npx playwright show-report
 - [Playwright](https://playwright.dev/) — test framework and browser automation
 - JavaScript (ES Modules)
 - Page Object Model (POM) pattern
-- Chromium & Firefox cross-browser testing
+- Allure Reporter — interactive test reporting
+- GitHub Actions — CI/CD pipeline
+- BrowserStack Automate — cloud cross-browser testing
+- Docker — containerised test execution
 - dotenv — environment variable management
 - cross-env — cross-platform environment switching
-- Conventional Commits for version control
+- Conventional Commits — version control discipline
 
 ---
 
